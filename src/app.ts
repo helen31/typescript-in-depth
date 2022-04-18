@@ -1,8 +1,24 @@
+// eslint-disable-next-line no-redeclare
+
 showHello('greeting', 'TypeScript');
 
 function showHello(divName: string, name: string) {
     const elt = document.getElementById(divName);
     elt.innerText = `Hello from ${name}`;
+}
+
+interface Person {
+    name: string;
+    email: string;
+}
+
+interface Author extends Person {
+    numBooksPublished: number;
+}
+
+interface Librarian extends Person {
+    department: string;
+    assistCustomer: (customer: string, bookTitle: string) => void;
 }
 
 // =========================================================
@@ -21,7 +37,10 @@ export type Book = {
     category: Category;
     author: string;
     available: boolean;
+    markDamaged?: () => void;
 };
+
+type BookProperties = keyof Book;
 
 function getAllBooks(): Book[] {
     return [
@@ -88,6 +107,43 @@ export function calcTotalPages(): BigInt {
     return totalPages;
 }
 
+// task 03.01
+
+function getTitles(author: string): string[];
+// eslint-disable-next-line no-redeclare
+function getTitles(available: boolean): string[];
+// eslint-disable-next-line no-redeclare
+function getTitles(id: number, available: boolean): string[];
+// eslint-disable-next-line no-redeclare
+function getTitles(...args: any[]): string[] {
+    const books = getAllBooks();
+
+    if (args.length === 1) {
+        const [arg] = args;
+
+        if (typeof arg === 'string') {
+            return books.filter(({ author }) => author === arg).map(({ title }) => title);
+        } else if (typeof arg === 'boolean') {
+            return books.filter(({ available }) => available === arg).map(({ title }) => title);
+        }
+    } else if (args.length === 2) {
+        const [idArg, availableArg] = args;
+        if (typeof idArg === 'number' && typeof availableArg === 'boolean') {
+            return books
+                .filter(({ available, id }) => available === availableArg && id === idArg)
+                .map(({ title }) => title);
+        }
+    }
+
+    return [];
+}
+
+function getProperty(book: Book, prop: BookProperties): any {
+    const value = book[prop];
+
+    return typeof value === 'function' ? value.name : value;
+}
+
 // ====================================================================
 
 // task 02.01
@@ -110,4 +166,21 @@ console.log(`Book author by index ${index}: `, bookAuthor);
 
 // task 02.10
 
-console.log(`Quantity book pages: ${calcTotalPages()}`);
+// console.log(`Quantity book pages: ${calcTotalPages()}`);
+
+// task 03.01
+
+const result = getTitles('Liang Yuxian Eugene');
+console.log(result);
+
+const favoriteAuthor: Author = {
+    name: 'Anna',
+    email: 'anna@gmail.com',
+    numBooksPublished: 2,
+};
+
+// task 04.05
+console.log(getProperty(getAllBooks()[0], 'title'));
+console.log(getProperty(getAllBooks()[0], 'markDamaged'));
+// console.log(getProperty(getAllBooks()[0], 'test'));
+
