@@ -42,8 +42,8 @@ export type Book = {
 
 type BookProperties = keyof Book;
 
-function getAllBooks(): Book[] {
-    return [
+function getAllBooks(): readonly Book[] {
+    return <const>[
         {
             id: 1,
             title: 'Refactoring JavaScript',
@@ -69,7 +69,7 @@ function getAllBooks(): Book[] {
     ];
 }
 
-export function logFirstAvailable(books: Book[]): void {
+export function logFirstAvailable(books: readonly Book[]): void {
     console.log(`Books length: ${books.length}`);
     console.log(`First Book available: ${books.find(book => book.available)?.title}`);
 }
@@ -96,7 +96,7 @@ export function getBookAuthorByIndex(index: number): [title?: string, author?: s
 
 export function calcTotalPages(): BigInt {
     let totalPages = BigInt(0);
-    const bookLibraries = [
+    const bookLibraries = <const>[
         { lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250 },
         { lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300 },
         { lib: 'libName3', books: 3_000_000_000, avgPagesPerBook: 280 },
@@ -166,12 +166,12 @@ console.log(`Book author by index ${index}: `, bookAuthor);
 
 // task 02.10
 
-// console.log(`Quantity book pages: ${calcTotalPages()}`);
+console.log(`Total book pages: ${calcTotalPages()}`);
 
 // task 03.01
 
-const result = getTitles('Liang Yuxian Eugene');
-console.log(result);
+// const result = getTitles('Liang Yuxian Eugene');
+// console.log(result);
 
 const favoriteAuthor: Author = {
     name: 'Anna',
