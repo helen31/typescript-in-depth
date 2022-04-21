@@ -6,20 +6,6 @@ function showHello(divName: string, name: string) {
     elt.innerText = `Hello from ${name}`;
 }
 
-interface Person {
-    name: string;
-    email: string;
-}
-
-interface Author extends Person {
-    numBooksPublished: number;
-}
-
-interface Librarian extends Person {
-    department: string;
-    assistCustomer: (customer: string, bookTitle: string) => void;
-}
-
 // =========================================================
 
 export enum Category {
@@ -47,7 +33,8 @@ interface Book {
     category: Category;
     pages?: number;
     // markDamaged?: (reason: string) => void;
-    markDamaged?(reason: string): void;
+    // markDamaged?(reason: string): void;
+    markDamaged?: DamageLogger;
 }
 
 type BookProperties = keyof Book;
@@ -202,6 +189,26 @@ function printBook(book: Book): void {
     console.log(`${book.title} by ${book.author}`);
 }
 
+interface DamageLogger {
+    (reason: string): void;
+}
+
+// task 04.03 Extending Interface
+
+interface Person {
+    name: string;
+    email: string;
+}
+
+interface Author extends Person {
+    numBooksPublished: number;
+}
+
+interface Librarian extends Person {
+    department: string;
+    assistCustomer(custName: string, bookTitle: string): void;
+}
+
 // ====================================================================
 
 // task 02.01
@@ -225,12 +232,6 @@ function printBook(book: Book): void {
 // task 02.10
 
 // console.log(`Total book pages: ${calcTotalPages()}`);
-
-const favoriteAuthor: Author = {
-    name: 'Anna',
-    email: 'anna@gmail.com',
-    numBooksPublished: 2,
-};
 
 // task 03.01
 // const myID: string = createCustomerID('Ann', 10);
@@ -271,8 +272,29 @@ const myBook: Book = {
     pages: 200,
     markDamaged: reason => console.log(`Damaged: ${reason}`),
 };
-printBook(myBook);
-myBook.markDamaged('missing back cover');
+// printBook(myBook);
+// myBook.markDamaged('missing back cover');
+
+// task 04.02
+// const logDamage: DamageLogger = reason => console.log(`Damaged: ${reason}`);
+// logDamage('There no 10 pages in the book.');
+
+// task 04.03 Extending Interface
+
+const favoriteAuthor: Author = {
+    name: 'Anna',
+    email: 'anna@gmail.com',
+    numBooksPublished: 2,
+};
+
+const favoriteLibrarian: Librarian = {
+    name: 'Robert',
+    email: 'robert@gmail.com',
+    department: 'marketing',
+    assistCustomer(custName: string, bookTitle: string) {
+        console.log(`Customer name: ${custName}, book totle: ${bookTitle}`);
+    },
+};
 
 // task 04.05
 // console.log(getProperty(getAllBooks()[0], 'title'));
