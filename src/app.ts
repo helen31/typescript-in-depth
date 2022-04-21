@@ -47,6 +47,9 @@ function getAllBooks(): readonly Book[] {
             category: Category.JavaScript,
             author: 'Evan Burchard',
             available: true,
+            markDamaged(reason: string) {
+                `Damaged: ${reason}`;
+            },
         },
         {
             id: 2,
@@ -194,8 +197,10 @@ interface DamageLogger {
 }
 
 // task 04.03 Extending Interface
+const id = Symbol('id');
 
 interface Person {
+    [id]: number;
     name: string;
     email: string;
 }
@@ -282,12 +287,14 @@ const myBook: Book = {
 // task 04.03 Extending Interface
 
 const favoriteAuthor: Author = {
+    [id]: 0,
     name: 'Anna',
     email: 'anna@gmail.com',
     numBooksPublished: 2,
 };
 
 const favoriteLibrarian: Librarian = {
+    [id]: 1,
     name: 'Robert',
     email: 'robert@gmail.com',
     department: 'marketing',
@@ -296,7 +303,18 @@ const favoriteLibrarian: Librarian = {
     },
 };
 
-// task 04.05
+// task 04.04. Optional Chaining
+const offer: any = {
+    book: {
+        title: 'Essential TypeScript',
+    },
+};
+// console.log(offer.magazine);
+// console.log(offer.magazine?.getTitle());
+// console.log(offer.book.getTitle?.());
+// console.log(offer.book.authors?.[0]);
+
+// task 04.05  Keyof Operator
 // console.log(getProperty(getAllBooks()[0], 'title'));
 // console.log(getProperty(getAllBooks()[0], 'markDamaged'));
 // console.log(getProperty(getAllBooks()[0], 'test'));
