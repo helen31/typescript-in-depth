@@ -30,23 +30,25 @@ export enum Category {
     Angular,
 }
 
-export type Book = {
-    id: number;
-    title: string;
-    category: Category;
-    author: string;
-    available: boolean;
-    markDamaged?: () => void;
-};
-
-// interface Book {
+// export type Book = {
 //     id: number;
 //     title: string;
+//     category: Category;
 //     author: string;
 //     available: boolean;
-//     category: Category;
 //     markDamaged?: () => void;
-// }
+// };
+
+interface Book {
+    id: number;
+    title: string;
+    author: string;
+    available: boolean;
+    category: Category;
+    pages?: number;
+    // markDamaged?: (reason: string) => void;
+    markDamaged?(reason: string): void;
+}
 
 type BookProperties = keyof Book;
 
@@ -139,7 +141,7 @@ function createCustomer(name: string, age?: number, city?: string): void {
     }
 }
 
-function getBookByID(id: Book['id']): Book {
+function getBookByID(id: Book['id']): Book | undefined {
     return getAllBooks().find(book => book.id === id);
 }
 
@@ -192,6 +194,12 @@ function bookTitleTransform(title: any): string | never {
     assertStringValue(title);
 
     return title.split('').reverse().join('');
+}
+
+// task 04.01 Defining an Interface
+
+function printBook(book: Book): void {
+    console.log(`${book.title} by ${book.author}`);
 }
 
 // ====================================================================
@@ -250,6 +258,21 @@ const favoriteAuthor: Author = {
 // task 03.04. Assertion Functions
 // console.log(bookTitleTransform('Privet'));
 // console.log(bookTitleTransform(10));
+
+// task 04.01 Defining an Interface
+const myBook: Book = {
+    id: 5,
+    title: 'Colors, Backgrounds, and Gradients',
+    author: 'Eric A. Meyer',
+    available: true,
+    category: Category.CSS,
+    // year: 2015,
+    // copies: 3,
+    pages: 200,
+    markDamaged: reason => console.log(`Damaged: ${reason}`),
+};
+printBook(myBook);
+myBook.markDamaged('missing back cover');
 
 // task 04.05
 // console.log(getProperty(getAllBooks()[0], 'title'));
