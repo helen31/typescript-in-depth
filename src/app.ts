@@ -269,6 +269,17 @@ class Encyclopedia extends ReferenceItem {
     }
 }
 
+class UniversityLibrarian implements Librarian {
+    department: string;
+    email: string;
+    [id]: number;
+    name: string;
+
+    assistCustomer(custName: string, bookTitle: string): void {
+        console.log(`${this.name} is assisting ${custName} with the book ${bookTitle}`);
+    }
+}
+
 // ====================================================================
 
 // task 02.01
@@ -348,15 +359,15 @@ const favoriteAuthor: Author = {
     numBooksPublished: 2,
 };
 
-const favoriteLibrarian: Librarian = {
-    [id]: 1,
-    name: 'Robert',
-    email: 'robert@gmail.com',
-    department: 'marketing',
-    assistCustomer(custName: string, bookTitle: string) {
-        console.log(`Customer name: ${custName}, book totle: ${bookTitle}`);
-    },
-};
+// const favoriteLibrarian: Librarian = {
+//     [id]: 1,
+//     name: 'Robert',
+//     email: 'robert@gmail.com',
+//     department: 'marketing',
+//     assistCustomer(custName: string, bookTitle: string) {
+//         console.log(`Customer name: ${custName}, book totle: ${bookTitle}`);
+//     },
+// };
 
 // task 04.04. Optional Chaining
 const offer: any = {
@@ -391,5 +402,10 @@ const offer: any = {
 // Object.getPrototypeOf(Object.getPrototypeOf(refBook)).printItem.call(refBook);
 
 // task 05.03. Creating Abstract Classes
-const refBook = new Encyclopedia(2, 'TS in Depth', 2022, 3);
-refBook.printCitation();
+// const refBook = new Encyclopedia(2, 'TS in Depth', 2022, 3);
+// refBook.printCitation();
+
+// task 05.04. Interfaces for Class Types
+const favoriteLibrarian: Librarian = new UniversityLibrarian();
+favoriteLibrarian.name = 'Anna';
+favoriteLibrarian.assistCustomer('Helen', 'Javascript in Depth');
