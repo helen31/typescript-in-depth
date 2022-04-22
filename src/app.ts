@@ -379,4 +379,7 @@ const offer: any = {
 // task 05.02. Extending Classes
 const refBook = new Encyclopedia(2, 'TS in Depth', 2022, 3);
 console.log(refBook);
-console.log(refBook.printItem());
+console.log('Subclass printItem call ----->>');
+refBook.printItem();
+console.log('Base printItem call ----->>');
+Object.getPrototypeOf(Object.getPrototypeOf(refBook)).printItem.call(refBook);
