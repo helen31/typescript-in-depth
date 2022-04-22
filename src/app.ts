@@ -224,7 +224,7 @@ class ReferenceItem {
     private _publisher: string;
     static department = 'Management department';
 
-    constructor(id: number, public title: string, private year: number) {
+    constructor(id: number, public title: string, protected year: number) {
         console.log('Creating a new ReferenceItem...');
 
         // this.title = newTitle;
@@ -249,6 +249,17 @@ class ReferenceItem {
 
     getID(): number {
         return this.#id;
+    }
+}
+
+class Encyclopedia extends ReferenceItem {
+    constructor(id: number, title: string, year: number, public edition: number) {
+        super(id, title, year);
+    }
+
+    override printItem(): void {
+        super.printItem();
+        console.log(`Edition: ${this.edition} - ${this.year}`);
     }
 }
 
@@ -358,9 +369,14 @@ const offer: any = {
 // console.log(getProperty(getAllBooks()[0], 'test'));
 
 // task 05.01. Creating and Using Classes
-const ref = new ReferenceItem(2, 'Learn TypeScript', 2022);
-ref.printItem();
-ref.publisher = 'abc';
-console.log(ref);
-console.log(ref.getID());
-console.log(ref.printItem());
+// const ref = new ReferenceItem(2, 'Learn TypeScript', 2022);
+// ref.printItem();
+// ref.publisher = 'abc';
+// console.log(ref);
+// console.log(ref.getID());
+// console.log(ref.printItem());
+
+// task 05.02. Extending Classes
+const refBook = new Encyclopedia(2, 'TS in Depth', 2022, 3);
+console.log(refBook);
+console.log(refBook.printItem());
