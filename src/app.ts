@@ -1,4 +1,6 @@
-/* eslint-disable no-redeclare */
+/* eslint-disable */
+/* eslint-disable-next-line no-underscore-dangle */
+
 showHello('greeting', 'TypeScript');
 
 function showHello(divName: string, name: string) {
@@ -214,6 +216,42 @@ interface Librarian extends Person {
     assistCustomer(custName: string, bookTitle: string): void;
 }
 
+// task 05.01. Creating and Using Classes
+class ReferenceItem {
+    // title: string;
+    // year: number;
+    #id: number;
+    private _publisher: string;
+    static department = 'Management department';
+
+    constructor(id: number, public title: string, private year: number) {
+        console.log('Creating a new ReferenceItem...');
+
+        // this.title = newTitle;
+        // this.year = newYear;
+        this.#id = id;
+    }
+
+    get publisher(): string {
+        return this._publisher.toLocaleUpperCase();
+    }
+
+    set publisher(newPublisher) {
+        this._publisher = newPublisher;
+    }
+
+    printItem(): void {
+        // console.log(`${this.title} was published in ${this.year}. ${ReferenceItem.department}`);
+        console.log(
+            `${this.title} was published in ${this.year}. ${Object.getPrototypeOf(this).constructor.department}`,
+        );
+    }
+
+    getID(): number {
+        return this.#id;
+    }
+}
+
 // ====================================================================
 
 // task 02.01
@@ -318,3 +356,11 @@ const offer: any = {
 // console.log(getProperty(getAllBooks()[0], 'title'));
 // console.log(getProperty(getAllBooks()[0], 'markDamaged'));
 // console.log(getProperty(getAllBooks()[0], 'test'));
+
+// task 05.01. Creating and Using Classes
+const ref = new ReferenceItem(2, 'Learn TypeScript', 2022);
+ref.printItem();
+ref.publisher = 'abc';
+console.log(ref);
+console.log(ref.getID());
+console.log(ref.printItem());
