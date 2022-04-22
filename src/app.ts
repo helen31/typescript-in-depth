@@ -217,7 +217,7 @@ interface Librarian extends Person {
 }
 
 // task 05.01. Creating and Using Classes
-class ReferenceItem {
+abstract class ReferenceItem {
     // title: string;
     // year: number;
     #id: number;
@@ -250,6 +250,8 @@ class ReferenceItem {
     getID(): number {
         return this.#id;
     }
+
+    abstract  printCitation(): void;
 }
 
 class Encyclopedia extends ReferenceItem {
@@ -260,6 +262,10 @@ class Encyclopedia extends ReferenceItem {
     override printItem(): void {
         super.printItem();
         console.log(`Edition: ${this.edition} - ${this.year}`);
+    }
+
+    printCitation(): void {
+        console.log(`${this.title} - ${this.year}`);
     }
 }
 
@@ -377,9 +383,13 @@ const offer: any = {
 // console.log(ref.printItem());
 
 // task 05.02. Extending Classes
+// const refBook = new Encyclopedia(2, 'TS in Depth', 2022, 3);
+// console.log(refBook);
+// console.log('Subclass printItem call ----->>');
+// refBook.printItem();
+// console.log('Base printItem call ----->>');
+// Object.getPrototypeOf(Object.getPrototypeOf(refBook)).printItem.call(refBook);
+
+// task 05.03. Creating Abstract Classes
 const refBook = new Encyclopedia(2, 'TS in Depth', 2022, 3);
-console.log(refBook);
-console.log('Subclass printItem call ----->>');
-refBook.printItem();
-console.log('Base printItem call ----->>');
-Object.getPrototypeOf(Object.getPrototypeOf(refBook)).printItem.call(refBook);
+refBook.printCitation();
