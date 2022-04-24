@@ -426,15 +426,15 @@ const offer: any = {
 // favoriteLibrarian.assistCustomer('Helen', 'Javascript in Depth');
 
 // task 05.05. Intersection and Union Types
-const PersonBook: PersonBook = {
-    [id]: 2,
-    name: 'Helen',
-    email: 'helen@test.com',
-    id: 5,
-    title: 'JavaScript Testing',
-    category: Category.JavaScript,
-    author: 'Liang Yuxian Eugene',
-    available: false,
-};
-console.log(PersonBook);
-console.log(setDefaultConfig({duration: 5}));
+// const PersonBook: PersonBook = {
+//     [id]: 2,
+//     name: 'Helen',
+//     email: 'helen@test.com',
+//     id: 5,
+//     title: 'JavaScript Testing',
+//     category: Category.JavaScript,
+//     author: 'Liang Yuxian Eugene',
+//     available: false,
+// };
+// console.log(PersonBook);
+// console.log(setDefaultConfig({duration: 5}));
