@@ -1,0 +1,24 @@
+var Utility;
+(function (Utility) {
+    var Fees;
+    (function (Fees) {
+        function calculateLateFee(daysLate) {
+            return daysLate * 0.25;
+        }
+        Fees.calculateLateFee = calculateLateFee;
+    })(Fees = Utility.Fees || (Utility.Fees = {}));
+    function maxBooksAllowed(age) {
+        return age < 12 ? 3 : 10;
+    }
+    Utility.maxBooksAllowed = maxBooksAllowed;
+    function privateFunc() {
+        console.log('This is a private function');
+    }
+})(Utility || (Utility = {}));
+/// <reference path="utility-functions.ts" />
+// for ts compiler to compile the code with all dependencies
+var result = Utility.maxBooksAllowed(37);
+console.log(result);
+var util = Utility.Fees;
+var fee = util.calculateLateFee(3);
+console.log(fee);
