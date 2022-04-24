@@ -133,7 +133,7 @@ function createCustomer(name: string, age?: number, city?: string): void {
     }
 }
 
-function getBookByID(id: Book['id']): Book | undefined {
+function getBookByID(id: Book['id']): BookOrUndefined {
     return getAllBooks().find(book => book.id === id);
 }
 
@@ -280,6 +280,21 @@ class UniversityLibrarian implements Librarian {
     }
 }
 
+type PersonBook = Person & Book;
+type BookOrUndefined = Book | undefined;
+
+interface TOptions {
+    duration?: number;
+    speed?: number;
+}
+
+function setDefaultConfig(options: TOptions): TOptions {
+    return {
+        duration: options.duration ?? 55,
+        speed: options.speed ?? 100,
+    };
+}
+
 // ====================================================================
 
 // task 02.01
@@ -406,6 +421,20 @@ const offer: any = {
 // refBook.printCitation();
 
 // task 05.04. Interfaces for Class Types
-const favoriteLibrarian: Librarian = new UniversityLibrarian();
-favoriteLibrarian.name = 'Anna';
-favoriteLibrarian.assistCustomer('Helen', 'Javascript in Depth');
+// const favoriteLibrarian: Librarian = new UniversityLibrarian();
+// favoriteLibrarian.name = 'Anna';
+// favoriteLibrarian.assistCustomer('Helen', 'Javascript in Depth');
+
+// task 05.05. Intersection and Union Types
+const PersonBook: PersonBook = {
+    [id]: 2,
+    name: 'Helen',
+    email: 'helen@test.com',
+    id: 5,
+    title: 'JavaScript Testing',
+    category: Category.JavaScript,
+    author: 'Liang Yuxian Eugene',
+    available: false,
+};
+console.log(PersonBook);
+console.log(setDefaultConfig({duration: 5}));
