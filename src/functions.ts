@@ -2,6 +2,7 @@
 import { Book, TOptions } from './interfaces';
 import { Category } from './enums';
 import { BookOrUndefined, BookProperties } from './types';
+import RefBook from './encyclopedia';
 
 function getAllBooks(): readonly Book[] {
     return <const>[
@@ -155,6 +156,18 @@ function setDefaultConfig(options: TOptions): TOptions {
     };
 }
 
+function assertRefBookInstance(condition: any): asserts condition {
+    if (!condition) {
+        throw new Error('It is not an instance of RefBook');
+    }
+}
+
+function printRefBook(data: any): void {
+    assertRefBookInstance(data instanceof RefBook);
+
+    data.printItem();
+}
+
 export {
     getAllBooks,
     logFirstAvailable,
@@ -172,4 +185,5 @@ export {
     bookTitleTransform,
     printBook,
     setDefaultConfig,
+    printRefBook,
 };

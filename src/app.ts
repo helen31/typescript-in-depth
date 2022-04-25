@@ -6,15 +6,22 @@ import { id } from './constants';
 import { ReferenceItem, UniversityLibrarian } from './classes';
 import { BookProperties, PersonBook, BookOrUndefined } from './types';
 import {
-    bookTitleTransform, calcTotalPages,
+    bookTitleTransform,
+    calcTotalPages,
     createCustomer,
-    createCustomerID, getAllBooks, getBookAuthorByIndex,
+    createCustomerID,
+    getAllBooks,
+    getBookAuthorByIndex,
     getBookByID,
-    getBookTitlesByCategory, getProperty,
-    getTitles, logBookTitles,
-    logFirstAvailable, setDefaultConfig, сheckoutBooks
-} from "./functions";
-
+    getBookTitlesByCategory,
+    getProperty,
+    getTitles,
+    logBookTitles,
+    logFirstAvailable, printRefBook,
+    setDefaultConfig,
+    сheckoutBooks,
+} from './functions';
+import RefBook from './encyclopedia';
 
 showHello('greeting', 'TypeScript');
 
@@ -33,21 +40,6 @@ function showHello(divName: string, name: string) {
 //     available: boolean;
 //     markDamaged?: () => void;
 // };
-
-class Encyclopedia extends ReferenceItem {
-    constructor(id: number, title: string, year: number, public edition: number) {
-        super(id, title, year);
-    }
-
-    override printItem(): void {
-        super.printItem();
-        console.log(`Edition: ${this.edition} - ${this.year}`);
-    }
-
-    printCitation(): void {
-        console.log(`${this.title} - ${this.year}`);
-    }
-}
 
 // ====================================================================
 
@@ -162,7 +154,7 @@ class Encyclopedia extends ReferenceItem {
 // console.log(ref.printItem());
 
 // task 05.02. Extending Classes
-// const refBook = new Encyclopedia(2, 'TS in Depth', 2022, 3);
+// const refBook = new RefBook(2, 'TS in Depth', 2022, 3);
 // console.log(refBook);
 // console.log('Subclass printItem call ----->>');
 // refBook.printItem();
@@ -170,8 +162,8 @@ class Encyclopedia extends ReferenceItem {
 // Object.getPrototypeOf(Object.getPrototypeOf(refBook)).printItem.call(refBook);
 
 // task 05.03. Creating Abstract Classes
-// const refEncyclopedia = new Encyclopedia(2, 'TS in Depth', 2022, 3);
-// Encyclopedia.printCitation();
+// const refEncyclopedia = new RefBook(2, 'TS in Depth', 2022, 3);
+// RefBook.printCitation();
 
 // task 05.04. Interfaces for Class Types
 // const favoriteLibrarian: Librarian = new UniversityLibrarian();
@@ -191,3 +183,7 @@ class Encyclopedia extends ReferenceItem {
 // };
 // console.log(PersonBook);
 // console.log(setDefaultConfig({duration: 5}));
+
+// task 06.03. Default Export
+printRefBook(new RefBook(999, 'TS in Depth', 2021, 44));
+printRefBook(new UniversityLibrarian());
