@@ -3,7 +3,6 @@
 import { Category } from './enums';
 import { Author, Book, Librarian, Logger, Person } from './interfaces';
 import { id } from './constants';
-import { ReferenceItem, UniversityLibrarian } from './classes';
 import { BookProperties, PersonBook, BookOrUndefined } from './types';
 import {
     bookTitleTransform,
@@ -17,11 +16,12 @@ import {
     getProperty,
     getTitles,
     logBookTitles,
-    logFirstAvailable, printRefBook,
+    logFirstAvailable,
+    printRefBook,
     setDefaultConfig,
     сheckoutBooks,
 } from './functions';
-import RefBook from './encyclopedia';
+import { RefBook, ReferenceItem, UL } from './classes';
 
 showHello('greeting', 'TypeScript');
 
@@ -166,7 +166,7 @@ function showHello(divName: string, name: string) {
 // RefBook.printCitation();
 
 // task 05.04. Interfaces for Class Types
-// const favoriteLibrarian: Librarian = new UniversityLibrarian();
+// const favoriteLibrarian: Librarian = new Ul.UniversityLibrarian();
 // favoriteLibrarian.name = 'Anna';
 // favoriteLibrarian.assistCustomer('Helen', 'Javascript in Depth');
 
@@ -185,5 +185,5 @@ function showHello(divName: string, name: string) {
 // console.log(setDefaultConfig({duration: 5}));
 
 // task 06.03. Default Export
-printRefBook(new RefBook(999, 'TS in Depth', 2021, 44));
-printRefBook(new UniversityLibrarian());
+// printRefBook(new RefBook(999, 'TS in Depth', 2021, 44));
+// printRefBook(new UL.UniversityLibrarian());

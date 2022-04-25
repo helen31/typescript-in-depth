@@ -2,7 +2,7 @@
 import { Book, TOptions } from './interfaces';
 import { Category } from './enums';
 import { BookOrUndefined, BookProperties } from './types';
-import RefBook from './encyclopedia';
+import RefBook from './classes/encyclopedia';
 
 function getAllBooks(): readonly Book[] {
     return <const>[
