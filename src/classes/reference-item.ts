@@ -1,19 +1,5 @@
-import * as Interfaces from './interfaces';
-import { id } from './constants';
-
 /* eslint-disable */
 /* eslint-disable-next-line no-underscore-dangle */
-
-class UniversityLibrarian implements Interfaces.Librarian {
-    department: string;
-    email: string;
-    [id]: number;
-    name: string;
-
-    assistCustomer(custName: string, bookTitle: string): void {
-        console.log(`${this.name} is assisting ${custName} with the book ${bookTitle}`);
-    }
-}
 
 abstract class ReferenceItem {
     // title: string;
@@ -52,4 +38,4 @@ abstract class ReferenceItem {
     abstract printCitation(): void;
 }
 
-export { UniversityLibrarian, ReferenceItem };
+export { ReferenceItem };
