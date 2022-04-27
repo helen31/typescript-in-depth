@@ -1,7 +1,7 @@
 /* eslint-disable */
 /* eslint-disable-next-line no-underscore-dangle */
 import { Category } from './enums';
-import {Author, Book, Librarian, Logger, Magazine, Person} from './interfaces';
+import { Author, Book, Librarian, Logger, Magazine, Person, ShelfItem } from './interfaces';
 import { id } from './constants';
 import {
     BookProperties,
@@ -9,7 +9,7 @@ import {
     BookOrUndefined,
     BookRequiredFields,
     UpdatedBook,
-    СreateCustomerFunctionType
+    СreateCustomerFunctionType,
 } from './types';
 import {
     bookTitleTransform,
@@ -30,7 +30,7 @@ import {
     setDefaultConfig,
     сheckoutBooks,
 } from './functions';
-import { RefBook, ReferenceItem, Shelf, UL } from './classes';
+import { Library, RefBook, ReferenceItem, Shelf, UL } from './classes';
 
 showHello('greeting', 'TypeScript');
 
@@ -40,13 +40,13 @@ function showHello(divName: string, name: string) {
 }
 
 // task 06.05. Dynamic Import Expression
-const flag = true;
-
-if (flag) {
-    const classesModule = await import('./classes');
-    const reader = new classesModule.Reader();
-    console.log('reader -->>', reader);
-}
+// const flag = true;
+//
+// if (flag) {
+//     const classesModule = await import('./classes');
+//     const reader = new classesModule.Reader();
+//     console.log('reader -->>', reader);
+// }
 
 // if (flag) {
 //     import('./classes').then(module => {
@@ -256,3 +256,8 @@ if (flag) {
 // const updatedBook: UpdatedBook = {};
 // const p: Parameters<СreateCustomerFunctionType> = ['Anna', 30];
 // console.log(...p);
+
+// task 06.06. Type-Only Imports and Exports
+// const library: Library = new Library();
+const library: Library = { id: 0, name: 'Anna', address: 'Kyiv' };
+console.log(library);
