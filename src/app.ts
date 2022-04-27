@@ -1,9 +1,16 @@
 /* eslint-disable */
 /* eslint-disable-next-line no-underscore-dangle */
 import { Category } from './enums';
-import { Author, Book, Librarian, Logger, Person } from './interfaces';
+import { Author, Book, Librarian, Logger, Magazine, Person } from './interfaces';
 import { id } from './constants';
-import { BookProperties, PersonBook, BookOrUndefined } from './types';
+import {
+    BookProperties,
+    PersonBook,
+    BookOrUndefined,
+    BookRequiredFields,
+    UpdatedBook,
+    СreateCustomerFunctionType
+} from './types';
 import {
     bookTitleTransform,
     calcTotalPages,
@@ -13,15 +20,17 @@ import {
     getBookAuthorByIndex,
     getBookByID,
     getBookTitlesByCategory,
+    getObjectProperty,
     getProperty,
     getTitles,
     logBookTitles,
     logFirstAvailable,
     printRefBook,
+    purge,
     setDefaultConfig,
     сheckoutBooks,
 } from './functions';
-import { RefBook, ReferenceItem, UL } from './classes';
+import { RefBook, ReferenceItem, Shelf, UL } from './classes';
 
 showHello('greeting', 'TypeScript');
 
@@ -187,3 +196,47 @@ function showHello(divName: string, name: string) {
 // task 06.03. Default Export
 // printRefBook(new RefBook(999, 'TS in Depth', 2021, 44));
 // printRefBook(new UL.UniversityLibrarian());
+
+// task 07.01. Generic Functions
+const inventory: Book[] = [
+    { id: 10, title: 'The C Programming Language', author: 'K & R', available: true, category: Category.Software },
+    { id: 11, title: 'Code Complete', author: 'Steve McConnell', available: true, category: Category.Software },
+    { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
+    { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software },
+];
+// const result = purge<Book>(inventory);
+// console.log(result);
+
+// task 07.02. Generic Interfaces and Classes
+const bookShelf = new Shelf<Book>();
+// inventory.forEach(book => bookShelf.add(book));
+// console.log(bookShelf.getFirst());
+const magazines: Magazine[] = [
+    { title: 'Programming Language Monthly', publisher: 'Code Mags' },
+    { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
+    { title: 'Five Points', publisher: 'GSU' },
+];
+const magazineShelf = new Shelf<Magazine>();
+magazines.forEach(mag => magazineShelf.add(mag));
+// console.log(magazineShelf.getFirst());
+
+// task 07.03. Generic Constraints
+// console.log(magazineShelf.printItems());
+// console.log(magazineShelf.find('Five Points'));
+// console.log(magazineShelf.find('Five Points'));
+const author = getObjectProperty(getAllBooks()[0], 'author');
+// console.log(author);
+
+// task 07.04. Utility Types
+const bookRequiredFields: BookRequiredFields = {
+    id: 1,
+    title: 'Refactoring JavaScript',
+    category: Category.JavaScript,
+    author: 'Evan Burchard',
+    available: true,
+    pages: 5,
+    markDamaged: () => {},
+};
+const updatedBook: UpdatedBook = {};
+const p: Parameters<СreateCustomerFunctionType> = ['Anna', 30];
+console.log(...p);

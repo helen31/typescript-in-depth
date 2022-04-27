@@ -1,7 +1,6 @@
 import { Category } from './enums';
 import { id } from './constants';
 
-
 interface Book {
     id: number;
     title: string;
@@ -38,4 +37,14 @@ interface TOptions {
     speed?: number;
 }
 
-export { Book, DamageLogger as Logger, Person, Author, Librarian, TOptions };
+interface Magazine {
+    title: string;
+    publisher: string;
+    category?: string;
+}
+
+interface ShelfItem {
+    title: string;
+}
+
+export { Book, DamageLogger as Logger, Person, Author, Librarian, TOptions, Magazine, ShelfItem };
