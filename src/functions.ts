@@ -168,6 +168,15 @@ function printRefBook(data: any): void {
     data.printItem();
 }
 
+function purge<T>(inventory: T[]): T[] {
+    return inventory.slice(2);
+}
+
+function getObjectProperty<TObject, TKey extends keyof TObject>(obj: TObject, prop: TKey): TObject[TKey] | string {
+    const value = obj[prop];
+    return typeof value === 'function' ? value.name : value;
+}
+
 export {
     getAllBooks,
     logFirstAvailable,
@@ -186,4 +195,6 @@ export {
     printBook,
     setDefaultConfig,
     printRefBook,
+    purge,
+    getObjectProperty,
 };
