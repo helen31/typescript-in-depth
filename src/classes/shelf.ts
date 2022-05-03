@@ -1,5 +1,4 @@
 import { ShelfItem } from '../interfaces';
-import { RequiredKeys } from '../types';
 
 export default class Shelf<T extends ShelfItem = ShelfItem> {
     private items: T[] = [];
@@ -18,16 +17,5 @@ export default class Shelf<T extends ShelfItem = ShelfItem> {
 
     printItems(): void {
         this.items.forEach(item => console.log(item.title));
-    }
-
-    printItemsWithRequiredPops<T>(fields: RequiredKeys<T>[]): void {
-        this.items.forEach(item => {
-            return Object.keys(item).reduce((accum, key) => {
-                if (fields.includes(key as RequiredKeys<T>)) {
-                    accum[key] = item[key];
-                }
-                return accum;
-            }, {});
-        });
     }
 }
