@@ -1,36 +1,8 @@
 /* eslint-disable */
 /* eslint-disable-next-line no-underscore-dangle */
 import { Category } from './enums';
-import { Author, Book, Librarian, Logger, Magazine, Person, ShelfItem } from './interfaces';
-import { id } from './constants';
-import {
-    BookProperties,
-    PersonBook,
-    BookOrUndefined,
-    BookRequiredFields,
-    UpdatedBook,
-    СreateCustomerFunctionType,
-} from './types';
-import {
-    bookTitleTransform,
-    calcTotalPages,
-    createCustomer,
-    createCustomerID,
-    getAllBooks,
-    getBookAuthorByIndex,
-    getBookByID,
-    getBookTitlesByCategory,
-    getObjectProperty,
-    getProperty,
-    getTitles,
-    logBookTitles,
-    logFirstAvailable,
-    printRefBook,
-    purge,
-    setDefaultConfig,
-    сheckoutBooks,
-} from './functions';
-import { Library, RefBook, ReferenceItem, Shelf, UL } from './classes';
+import { logSearchResults } from './functions';
+import { RefBook, UL } from './classes';
 
 showHello('greeting', 'TypeScript');
 
@@ -259,5 +231,61 @@ function showHello(divName: string, name: string) {
 
 // task 06.06. Type-Only Imports and Exports
 // const library: Library = new Library();
-const library: Library = { id: 0, name: 'Anna', address: 'Kyiv' };
-console.log(library);
+// const library: Library = { id: 0, name: 'Anna', address: 'Kyiv' };
+// console.log(library);
+
+// task 08.01. Class Decorators (sealed)
+// task 08.02. Class Decorators that replace constructor functions (logger)
+// task 08.03. Method Decorator (writable)
+// const obg = new UL.UniversityLibrarian();
+// console.log(obg);
+// obg.name = 'Anna';
+// obg['printLibrarian']();
+// UL.UniversityLibrarian['a'] = 1;
+// UL.UniversityLibrarian.prototype['b'] = 1;
+
+// const proto = Object.getPrototypeOf(Object);
+// console.log(proto);
+// proto.assistFaculty = null;
+// proto.teachCommunity = null;
+// obg.teachCommunity = null;
+
+// task 08.04. Method Decorator (timeout)
+// const enc = new RefBook(2, 'TS in Depth', 2022, 3);
+// enc.printItem();
+
+// task 08.05. Parameter Decorator (logParameter)
+// const obg = new UL.UniversityLibrarian();
+// obg.name = 'Anna';
+// obg.assistCustomer('Helen', 'TypeScript');
+
+// task 08.06. Property Decorator
+// let obg = new UL.UniversityLibrarian();
+// obg.name = 'Anna';
+// obg.assistCustomer('Helen', 'TypeScript')
+
+// task 08.07. Accessor Decorator
+// const enc = new RefBook(2, 'TS in Depth', 2022, 3);
+// enc.copies = 4;
+// console.log(enc);
+
+// task 09.01. Callback Functions
+// console.log('Begin');
+// getBooksByCategory(Category.JavaScript, logCategorySearch);
+// getBooksByCategory(Category.Software, logCategorySearch);
+// console.log('End');
+
+// task 09.02. Promises
+// console.log('Begin');
+// getBooksByCategoryPromise(Category.JavaScript).then(titles => {
+//     console.log(titles);
+//     return Promise.resolve(titles.length);
+// }).then(len => console.log(len)).catch(console.log);
+// getBooksByCategoryPromise(Category.Software).then(console.log).catch(console.log);
+// console.log('End');
+
+// task 09.03. Async Functions
+// console.log('Begin');
+// logSearchResults(Category.JavaScript);
+// logSearchResults(Category.Software).catch(console.log);
+// console.log('End');

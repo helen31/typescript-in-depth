@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Book, TOptions } from './interfaces';
+import { Book, Callback, LibMgrCallback, TOptions } from './interfaces';
 import { Category } from './enums';
 import { BookOrUndefined, BookProperties } from './types';
 import RefBook from './classes/encyclopedia';
@@ -177,6 +177,52 @@ function getObjectProperty<TObject, TKey extends keyof TObject>(obj: TObject, pr
     return typeof value === 'function' ? value.name : value;
 }
 
+// function getBooksByCategory(category: Category, callback: LibMgrCallback): void {
+function getBooksByCategory(category: Category, callback: Callback<string[]>): void {
+    setTimeout(() => {
+        try {
+            const titles = getBookTitlesByCategory(category);
+            if (titles.length > 0) {
+                callback(null, titles);
+            } else {
+                throw new Error('No books found');
+            }
+        } catch (err) {
+            callback(err, null);
+        }
+    }, 2000);
+}
+
+function logCategorySearch(err: Error | null, titles: string[] | null): void {
+    if (err) {
+        console.log(err.message);
+    } else {
+        console.log(titles);
+    }
+}
+
+function getBooksByCategoryPromise(category: Category): Promise<string[]> {
+    const p = new Promise<string[]>((res, reg) => {
+        setTimeout(() => {
+            const titles = getBookTitlesByCategory(category);
+
+            if (titles.length > 0) {
+                res(titles);
+            } else {
+                reg('No books found');
+            }
+        }, 2000);
+    });
+
+    return p;
+}
+
+async function logSearchResults(category: Category) {
+    const result: Awaited<ReturnType<typeof getBooksByCategoryPromise>> = await getBooksByCategoryPromise(category);
+
+    console.log(result.length);
+}
+
 export {
     getAllBooks,
     logFirstAvailable,
@@ -197,4 +243,8 @@ export {
     printRefBook,
     purge,
     getObjectProperty,
+    getBooksByCategory,
+    logCategorySearch,
+    getBooksByCategoryPromise,
+    logSearchResults,
 };
